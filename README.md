@@ -1,21 +1,11 @@
 ## 审批流
 
 Active4j-flow是基于SpingBoot2.0与activiti7.x开发的一套工作流程管理系统。
+- Active4j-flow内置了在线流程设计器，流程部署，流程定义，表单管理，流程权限管理，流程中心，我的流程，待我审批等基础流程管理功能。
+- Active4j-flow支持流程驳回，会签，组任务，权限管理，委托，审批意见等常用功能
 
-------------
-# 项目介绍
- - Active4j-flow内置了在线流程设计器，流程部署，流程定义，表单管理，流程权限管理，流程中心，我的流程，待我审批等基础流程管理功能。
- - Active4j-flow支持流程驳回，会签，组任务，权限管理，委托，审批意见等常用功能
-
-# 技术选型
-### 服务端
-| 技术 | 说明 | 官网  |
-| ------------ | ------------ | ------------ |
-|Spring Boot2|核心框架|[https://spring.io/projects/spring-boot/](https://spring.io/projects/spring-boot/ "https://spring.io/projects/spring-boot/")|
-|activiti7|流程引擎|[https://www.activiti.org/](https://www.activiti.org/ "https://www.activiti.org/")|
-
-
-# 功能列表
+---
+## 功能列表
 ```html
 - 流程管理
     ○ 流程类别：用于管理业务流程类别

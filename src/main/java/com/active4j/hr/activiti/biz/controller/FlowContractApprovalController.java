@@ -156,12 +156,17 @@ public class FlowContractApprovalController extends BaseController {
 	 * @param id   业务ID
 	 * @param taskId  任务ID
 	 * @param comment  填写的审批意见
+	 * @param result 结果，用于判断
 	 * @param request 
 	 * @return
 	 */
 	@RequestMapping("/doApprove")
 	@ResponseBody
-	public AjaxJson doApprove(String id, String taskId, String comment, String result, HttpServletRequest request){
+	public AjaxJson doApprove(String id,
+							  String taskId,
+							  String comment,
+							  String result,
+							  HttpServletRequest request){
 		AjaxJson j = new AjaxJson();
 		
 		try{
@@ -200,15 +205,17 @@ public class FlowContractApprovalController extends BaseController {
 	
 	/**
 	 * 保存方法
-	 * @param workflowCategoryEntity
+	 * @param workflowBaseEntity 工作流相关基本信息
 	 * @param optType  0 : 保存草稿   1:直接申请
-	 * @param flowId   流程管理中心ID
+	 * @param flowContractApprovalEntity   申请单相关基本信息
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/save")
 	@ResponseBody
-	public AjaxJson save(WorkflowBaseEntity workflowBaseEntity, FlowContractApprovalEntity flowContractApprovalEntity, String optType, HttpServletRequest request) {
+	public AjaxJson save(WorkflowBaseEntity workflowBaseEntity,
+						 FlowContractApprovalEntity flowContractApprovalEntity,
+						 String optType, HttpServletRequest request) {
 		AjaxJson j = new AjaxJson();
 		try {
 			if(!workflowBaseService.validWorkflowBase(workflowBaseEntity, j).isSuccess()) {
@@ -226,7 +233,7 @@ public class FlowContractApprovalController extends BaseController {
 				j.setMsg("金钱必须大于0");
 				return j;
 			}
-			
+			//获取流程图信息,workflowId为流程id
 			WorkflowMngEntity workflow = workflowMngService.getById(workflowBaseEntity.getWorkflowId());
 			if(null == workflow) {
 				j.setSuccess(false);
@@ -250,7 +257,8 @@ public class FlowContractApprovalController extends BaseController {
 					//启动流程
 					//赋值流程变量
 					Map<String, Object> variables = new HashMap<String, Object>();
-					workflowService.startProcessInstanceByKey(workflow.getProcessKey(), workflowBaseEntity.getId(), true, workflowBaseEntity.getUserName(), variables);
+					workflowService.startProcessInstanceByKey(workflow.getProcessKey(), workflowBaseEntity.getId(),
+							true, workflowBaseEntity.getUserName(), variables);
 				}else {
 					WorkflowBaseEntity base = workflowBaseService.getById(workflowBaseEntity.getId());
 					MyBeanUtils.copyBeanNotNull2Bean(workflowBaseEntity, base);
@@ -264,7 +272,8 @@ public class FlowContractApprovalController extends BaseController {
 					//启动流程
 					//赋值流程变量
 					Map<String, Object> variables = new HashMap<String, Object>();
-					workflowService.startProcessInstanceByKey(workflow.getProcessKey(), biz.getId(), true, base.getUserName(), variables);
+					workflowService.startProcessInstanceByKey(workflow.getProcessKey(), biz.getId(),
+							true, base.getUserName(), variables);
 					
 				}
 				

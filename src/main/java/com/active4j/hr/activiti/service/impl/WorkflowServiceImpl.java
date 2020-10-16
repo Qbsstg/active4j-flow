@@ -275,7 +275,8 @@ public class WorkflowServiceImpl implements WorkflowService {
 	 * @param flag                 存在申请人节点
 	 * @param applyName            申请人
 	 */
-	public void startProcessInstanceByKey(String processDefinitionKey, String businessKey, boolean flag, String applyName, Map<String, Object> map) {
+	public void startProcessInstanceByKey(String processDefinitionKey, String businessKey,
+										  boolean flag, String applyName, Map<String, Object> map) {
 		if (flag) {
 			// 存在申请人申请任务节点，在任务启动后，自动跳过
 			startProcessInstanceByKey(processDefinitionKey, map, businessKey);
@@ -592,7 +593,10 @@ public class WorkflowServiceImpl implements WorkflowService {
 	 * @param comments  审批意见
 	 * @param variables   流程变量
 	 */
-	public void saveBackTask(String taskId, String businessKey, String comments, Map<String, Object> variables){
+	public void saveBackTask(String taskId,
+							 String businessKey,
+							 String comments,
+							 Map<String, Object> variables){
 		//使用任务ID，查询任务对象，获取流程流程实例ID
 		Task task = taskService.createTaskQuery()//
 						.taskId(taskId)//使用任务ID查询
